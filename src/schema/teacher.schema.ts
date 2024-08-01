@@ -1,23 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 @Schema()
-export class Student {
+export class Teacher {
    @Prop()
    name: string;
-
    @Prop()
-   roleNumber: number;
-
+   mobileNumber: number;
    @Prop()
-   class: number;
-
-
+   classes: number[];
    @Prop()
    gender: string;
-
-   @Prop()
-   marks: number;
-
- 
 }
-export const StudentSchema = SchemaFactory.createForClass(Student);
+export const TeacherSchema = SchemaFactory.createForClass(Teacher);
