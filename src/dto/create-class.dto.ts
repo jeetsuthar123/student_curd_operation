@@ -1,17 +1,17 @@
 /* eslint-disable prettier/prettier */
 import { IsNotEmpty, IsNumber, IsString, MaxLength } from "class-validator";
-export class CreateTeacherDto {
+export class CreateClassDto {
     @IsString()
     @MaxLength(30)
     @IsNotEmpty()
     readonly name: string;
     @IsNumber()
     @IsNotEmpty()
-    readonly mobileNumber: number;
+    readonly classStrength: number;
+    @IsNumber()
     @IsNotEmpty()
-    readonly classes: number[];
-    @IsString()
-    @MaxLength(30)
+    readonly noOfBoys: number;
+    @IsNumber()
     @IsNotEmpty()
-    readonly gender: string;
+    readonly noOfGirls: number; 
 }
