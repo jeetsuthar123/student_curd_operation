@@ -3,9 +3,10 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { StudentModule } from './student.module';
-import { TeacherModule } from './teacher.module';
-import { StaffModule } from './staff.module';
+import { StudentModule } from './student/student.module';
+import { TeacherModule } from './teacher/teacher.module';
+import { StaffModule } from './staff/staff.module';
+import { SchoolModule } from './school/school.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { StaffModule } from './staff.module';
     StaffModule,
     StudentModule,
     TeacherModule,
+    SchoolModule,
   ],
   controllers: [AppController],
   providers: [AppService],
