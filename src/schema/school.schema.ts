@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
-import { CreateStudentDto } from "src/dto/create-student.dto";
-import { CreateTeacherDto } from "src/dto/create-Teacher.dto";
+import { IStudent } from "src/interface/student.interface";
+import { ITeacher } from "src/interface/Teacher.interface";
 @Schema()
 export class School {
    @Prop()
-   students: CreateStudentDto[];
+   students: IStudent[];
    @Prop()
-   teachers: CreateTeacherDto[];
+   teachers: ITeacher[];
 }
 export const SchoolSchema = SchemaFactory.createForClass(School);
