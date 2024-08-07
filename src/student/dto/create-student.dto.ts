@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsNumber, IsString, MaxLength } from "class-validator";
+import { IsEmpty, IsNotEmpty, IsNumber, IsString, MaxLength } from "class-validator";
+import { User } from "src/auth/schema/user.schema";
 export class CreateStudentDto {
     @IsString()
     @MaxLength(30)
@@ -19,4 +20,7 @@ export class CreateStudentDto {
     @IsNumber()
     @IsNotEmpty()
     readonly marks: number;
+    
+    @IsEmpty({message:"You can not pass user id"})
+    readonly user: User
 }

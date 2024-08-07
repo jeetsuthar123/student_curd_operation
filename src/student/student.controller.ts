@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
@@ -13,9 +13,9 @@ export class StudentController {
 
   @Post()
   @UseGuards(AuthGuard())
-   async createStudent(@Res() response, @Body() createStudentDto: CreateStudentDto) {
+   async createStudent(@Res() response, @Body() createStudentDto: CreateStudentDto, @Req() req) {
   try {
-    const newStudent = await this.studentService.createStudent(createStudentDto);
+    const newStudent = await this.studentService.createStudent(createStudentDto,req.user);
     return response.status(HttpStatus.CREATED).json({
     message: 'Student has been created successfully',
     newStudent,});

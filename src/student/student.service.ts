@@ -6,12 +6,14 @@ import { IStudent } from './interface/student.interface';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import {Query} from 'express-serve-static-core'
+import { User } from 'src/auth/schema/user.schema';
 
 @Injectable()
 export class StudentService {
   constructor(@InjectModel('Student') private studentModel:Model<IStudent>) { }
-  async createStudent(createStudentDto: CreateStudentDto): Promise<IStudent> {
-     const newStudent = await new this.studentModel(createStudentDto);
+  async createStudent(createStudentDto: CreateStudentDto, user:User): Promise<IStudent> {
+    const data = Object.assign(createStudentDto,{user: user?._id})
+     const newStudent = await new this.studentModel(data);
      return newStudent.save();
   }
   async updateStudent(studentId: string, updateStudentDto: UpdateStudentDto): Promise<IStudent> {
