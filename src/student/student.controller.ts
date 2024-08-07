@@ -1,16 +1,18 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Res, UseGuards } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 
 import {Query as ExpressQuery} from 'express-serve-static-core'
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('student')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   @Post()
+  @UseGuards(AuthGuard())
    async createStudent(@Res() response, @Body() createStudentDto: CreateStudentDto) {
   try {
     const newStudent = await this.studentService.createStudent(createStudentDto);
