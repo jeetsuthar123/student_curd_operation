@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Res } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
+
+import {Query as ExpressQuery} from 'express-serve-static-core'
 
 @Controller('student')
 export class StudentController {
@@ -36,9 +38,9 @@ async updateStudent(@Res() response,@Param('id') studentId: string,
  }
 }
 @Get()
-async getStudents(@Res() response) {
+async getStudents(@Res() response,  @Query() query: ExpressQuery) {
 try {
-  const studentData = await this.studentService.getAllStudents();
+  const studentData = await this.studentService.getAllStudents(query);
   return response.status(HttpStatus.OK).json({
   message: 'All students data found successfully',studentData,});
  } catch (err) {
