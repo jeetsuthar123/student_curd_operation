@@ -10,6 +10,7 @@ export class LogInDto {
   
   @IsString()
   @IsEmail({}, { message: 'please enter correct email' })
+  @IsNotEmpty()
   readonly email: string;
   
   @IsString()

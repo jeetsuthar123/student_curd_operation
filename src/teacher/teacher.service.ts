@@ -2,16 +2,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ITeacher } from './interface/teacher.interface';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
+import { TeacherDocument } from './schema/teacher.schema';
 
 @Injectable()
 export class TeacherService {
 
-  constructor(@InjectModel('Teacher') private teacherModel: Model<ITeacher>) {}
+  constructor(@InjectModel('Teacher') private teacherModel: Model<TeacherDocument>) {}
 
-  async createTeacher(createTeacherDto: CreateTeacherDto): Promise<ITeacher> {
+  async createTeacher(createTeacherDto: CreateTeacherDto): Promise<TeacherDocument> {
     const newTeacher = await new this.teacherModel(createTeacherDto);
     return newTeacher.save();
   }
@@ -19,7 +19,7 @@ export class TeacherService {
   async updateTeacher(
     TeacherId: string,
     updateTeacherDto: UpdateTeacherDto,
-  ): Promise<ITeacher> {
+  ): Promise<TeacherDocument> {
     const existingTeacher = await this.teacherModel.findByIdAndUpdate(
       TeacherId,
       updateTeacherDto,
@@ -32,7 +32,7 @@ export class TeacherService {
   }
 
 
-  async getAllTeachers(): Promise<ITeacher[]> {
+  async getAllTeachers(): Promise<TeacherDocument[]> {
     const TeacherData = await this.teacherModel.find();
     if (!TeacherData || TeacherData.length == 0) {
       throw new NotFoundException('Teachers data not found!');
@@ -42,7 +42,7 @@ export class TeacherService {
 
 
 
-  async getTeacher(TeacherId: string): Promise<ITeacher> {
+  async getTeacher(TeacherId: string): Promise<TeacherDocument> {
     const existingTeacher = await this.teacherModel.findById(TeacherId).exec();
     if (!existingTeacher) {
       throw new NotFoundException(`Teacher #${TeacherId} not found`);
@@ -52,7 +52,7 @@ export class TeacherService {
 
 
 
-  async deleteTeacher(TeacherId: string): Promise<ITeacher> {
+  async deleteTeacher(TeacherId: string): Promise<TeacherDocument> {
     const deletedTeacher = await this.teacherModel.findByIdAndDelete(TeacherId);
     if (!deletedTeacher) {
       throw new NotFoundException(`Teacher #${TeacherId} not found`);

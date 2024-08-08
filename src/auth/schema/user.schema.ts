@@ -1,6 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
-import { Document } from "mongoose";
+import { Document, HydratedDocument } from "mongoose";
+
+export type UserDocument = HydratedDocument<User>;
+
 @Schema()
 export class User extends Document {
    @Prop()
