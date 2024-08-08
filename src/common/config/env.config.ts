@@ -41,12 +41,12 @@ function objectifyValues(config: Record<string, unknown>): EnvConfig {
             refreshTokenExpiresIn: config.JWT_REFRESH_TOKEN_VALIDITY as string,
             refreshTokenSecret: config.JWT_REFRESH_TOKEN_SECRET as string,
         },
-        s3Config: {
-            accessKeyId: config.AWS_S3_ACCESS_KEY_ID as string,
-            secretAccessKey: config.AWS_S3_SECRET as string,
-            bucketName: config.AWS_S3_BUCKET_NAME as string,
-            region: config.AWS_S3_REGION as string,
-        },
+        // s3Config: {
+        //     accessKeyId: config.AWS_S3_ACCESS_KEY_ID as string,
+        //     secretAccessKey: config.AWS_S3_SECRET as string,
+        //     bucketName: config.AWS_S3_BUCKET_NAME as string,
+        //     region: config.AWS_S3_REGION as string,
+        // },
     };
 }
 

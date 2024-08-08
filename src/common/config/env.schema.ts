@@ -137,8 +137,8 @@ export class EnvConfig {
     /**
      * The configuration for S3.
      */
-    @ValidateNested()
-    @IsDefined()
-    @Type(() => S3Config)
-    s3Config: S3Config;
+    // @ValidateNested()
+    // @IsDefined()
+    // @Type(() => S3Config)
+    // s3Config: S3Config;
 }

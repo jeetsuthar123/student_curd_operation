@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 import { HydratedDocument } from "mongoose";
-import { IStudent } from "src/student/interface/student.interface";
-import { ITeacher } from "src/teacher/interface/teacher.interface";
+import { StudentDocument } from "src/student/schema/student.schema";
+import { TeacherDocument } from "src/teacher/schema/teacher.schema";
 
 export type SchoolDocument = HydratedDocument<School>;
 @Schema()
 export class School {
    @Prop()
-   students: IStudent[];
+   students: StudentDocument[];
    @Prop()
-   teachers: ITeacher[];
+   teachers: TeacherDocument[];
 }
 export const SchoolSchema = SchemaFactory.createForClass(School);
